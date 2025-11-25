@@ -84,21 +84,27 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
 
           {checkPassword && (
             <div className="animate-fade-in space-y-2">
-              <Label htmlFor="password" className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
+              <Label htmlFor="password" className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2 pl-0.5">
                 <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
                 Password
               </Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-                className="h-11 sm:h-12 bg-secondary border-border focus:border-primary text-base"
-                placeholder="Enter your password to check"
-              />
-              <p className="text-xs text-muted-foreground">
-                🔒 Your password is hashed locally and never sent in plain text.
+              <div className="relative">
+                <div className="absolute inset-y-0 left-3 sm:left-4 flex items-center pointer-events-none">
+                  <Lock className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
+                </div>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  className="h-11 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 bg-secondary border-border focus:border-primary text-base"
+                  placeholder="Enter your password to check"
+                />
+              </div>
+              <p className="text-xs text-muted-foreground pl-10 sm:pl-12 flex items-start gap-1">
+                <span className="text-sm">🔒</span>
+                <span>Your password is hashed locally and never sent in plain text.</span>
               </p>
             </div>
           )}
