@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Shield, AlertTriangle, CheckCircle2 } from "lucide-react";
 import EmailChecker from "@/components/EmailChecker";
 import BreachDashboard from "@/components/BreachDashboard";
+import { sha3_512 } from "js-sha3";
 
 export interface BreachData {
   email: string;
@@ -14,15 +15,18 @@ export interface BreachData {
   }>;
   breachCount: number;
   exposedRecords: number;
+  passwordStatus?: "safe" | "exposed" | "error" | "not-checked";
 }
 
 const Index = () => {
   const [breachData, setBreachData] = useState<BreachData | null>(null);
   const [isChecking, setIsChecking] = useState(false);
 
-  const handleCheckEmail = async (email: string) => {
+  const handleCheckEmail = async (email: string, password?: string) => {
     setIsChecking(true);
     setBreachData(null);
+
+    let passwordStatus: "safe" | "exposed" | "error" | "not-checked" = "not-checked";
 
     try {
       // First API call: Check if email is breached
@@ -47,6 +51,27 @@ const Index = () => {
       
       // Transform the data into our format
       const breaches = analyticsData.ExposedBreaches?.breaches_details || [];
+      // Check password if provided
+      if (password) {
+        try {
+          const pwdHash = sha3_512(password).substring(0, 10);
+          const passwordResponse = await fetch(
+            `https://passwords.xposedornot.com/api/v1/pass/anon/${encodeURIComponent(pwdHash)}`
+          );
+          
+          if (passwordResponse.status === 200) {
+            passwordStatus = "exposed";
+          } else if (passwordResponse.status === 404) {
+            passwordStatus = "safe";
+          } else {
+            passwordStatus = "error";
+          }
+        } catch (error) {
+          console.error("Error checking password:", error);
+          passwordStatus = "error";
+        }
+      }
+
       const transformedData: BreachData = {
         email,
         breaches: breaches.map((breach: any) => ({
@@ -60,6 +85,7 @@ const Index = () => {
         exposedRecords: breaches.reduce((total: number, breach: any) => 
           total + (breach.xposed_records || 0), 0
         ),
+        passwordStatus,
       };
 
       setBreachData(transformedData);
@@ -71,6 +97,7 @@ const Index = () => {
         breaches: [],
         breachCount: 0,
         exposedRecords: 0,
+        passwordStatus,
       });
     } finally {
       setIsChecking(false);
