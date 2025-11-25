@@ -55,9 +55,10 @@ const Index = () => {
       if (password) {
         try {
           const pwdHashAnon = keccak_512(password).substring(0, 10);
-          const passwordResponse = await fetch(
-            `https://passwords.xposedornot.com/v1/pass/anon/${encodeURIComponent(pwdHashAnon)}`
-          );
+          const url = `https://passwords.xposedornot.com/api/v1/pass/anon/${encodeURIComponent(pwdHashAnon)}`;
+          const passwordResponse = await fetch(url);
+
+          console.log("Password check", { pwdHashAnon, status: passwordResponse.status });
           
           if (passwordResponse.status === 200) {
             passwordStatus = "exposed";
