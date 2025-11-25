@@ -47,7 +47,7 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
 
   return (
     <div className="max-w-2xl mx-auto px-4 sm:px-0">
-      <div className="bg-card border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-10 
+      <div className="disable-cursor-glow bg-card border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-10 
                     shadow-[0_0_30px_rgba(34,211,238,0.1)] backdrop-blur-sm
                     hover:shadow-[0_0_40px_rgba(34,211,238,0.15)] transition-all duration-300">
         <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
