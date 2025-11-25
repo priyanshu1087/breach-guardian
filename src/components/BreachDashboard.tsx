@@ -10,15 +10,30 @@ interface BreachDashboardProps {
 
 const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
   const isExposed = data.breachCount > 0;
+  
+  // Calculate risk level
+  const getRiskLevel = () => {
+    const bothExposed = data.breachCount > 0 && data.passwordStatus === "exposed";
+    if (data.breachCount > 2 || bothExposed) return "High";
+    if (data.breachCount > 0) return "Medium";
+    return "Low";
+  };
+  
+  const riskLevel = getRiskLevel();
+  const riskColors = {
+    High: { bg: 'bg-destructive/10', border: 'border-destructive', text: 'text-destructive', glow: 'shadow-[0_0_40px_rgba(239,68,68,0.4)]' },
+    Medium: { bg: 'bg-warning/10', border: 'border-warning', text: 'text-warning', glow: 'shadow-[0_0_40px_rgba(251,146,60,0.4)]' },
+    Low: { bg: 'bg-success/10', border: 'border-success', text: 'text-success', glow: 'shadow-[0_0_40px_rgba(34,197,94,0.4)]' }
+  };
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8 animate-fade-in px-4 sm:px-0">
       {/* Status Banner */}
-      <div className={`rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-10 border-2 transition-all duration-500 ${
+      <div className={`rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-10 border-2 transition-all duration-500 backdrop-blur-sm ${
         isExposed 
-          ? 'bg-destructive/10 border-destructive shadow-[0_0_50px_rgba(239,68,68,0.2)]' 
-          : 'bg-success/10 border-success shadow-[0_0_50px_rgba(34,197,94,0.2)]'
-      }`}>
+          ? 'bg-gradient-to-br from-destructive/20 via-destructive/10 to-transparent border-destructive shadow-[0_0_60px_rgba(239,68,68,0.3)] animate-pulse' 
+          : 'bg-gradient-to-br from-success/20 via-success/10 to-transparent border-success shadow-[0_0_60px_rgba(34,197,94,0.3)]'
+      }`} style={{ animationDuration: '3s' }}>
         <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
           <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center flex-shrink-0 ${
             isExposed ? 'bg-destructive/20' : 'bg-success/20'
@@ -63,13 +78,13 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
 
       {/* Password Status */}
       {data.passwordStatus && data.passwordStatus !== "not-checked" && (
-        <div className={`rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border-2 backdrop-blur-sm ${
+        <div className={`rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border-2 backdrop-blur-sm transition-all duration-500 ${
           data.passwordStatus === "safe" 
-            ? "bg-success/10 border-success" 
+            ? "bg-gradient-to-br from-success/20 via-success/10 to-transparent border-success shadow-[0_0_30px_rgba(34,197,94,0.2)]" 
             : data.passwordStatus === "exposed"
-            ? "bg-destructive/10 border-destructive"
-            : "bg-warning/10 border-warning"
-        }`}>
+            ? "bg-gradient-to-br from-destructive/20 via-destructive/10 to-transparent border-destructive shadow-[0_0_30px_rgba(239,68,68,0.2)] animate-pulse"
+            : "bg-gradient-to-br from-warning/20 via-warning/10 to-transparent border-warning shadow-[0_0_30px_rgba(251,146,60,0.2)]"
+        }`} style={{ animationDuration: '3s' }}>
           <div className="flex items-start gap-3 sm:gap-4">
             <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
               data.passwordStatus === "safe" 
@@ -111,7 +126,7 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
 
       {/* Password Change Recommendation */}
       {isExposed && (
-        <div className="bg-warning/10 border-2 border-warning rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8">
+        <div className="bg-gradient-to-br from-warning/20 via-warning/10 to-transparent border-2 border-warning rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-[0_0_40px_rgba(251,146,60,0.3)] backdrop-blur-sm">
           <div className="flex items-start gap-3 sm:gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-warning/20 flex items-center justify-center flex-shrink-0">
               <Lock className="w-5 h-5 sm:w-6 sm:h-6 text-warning" />
@@ -148,7 +163,7 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
 
       {/* Analytics Summary */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-        <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-primary/50 transition-all duration-300">
+        <div className="bg-gradient-to-br from-card via-card to-primary/5 border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-primary/50 hover:shadow-[0_0_25px_rgba(34,211,238,0.2)] transition-all duration-300 hover:scale-105 transform">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
               <ShieldAlert className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
@@ -158,7 +173,7 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
           <p className="text-2xl sm:text-3xl font-bold text-foreground">{data.breachCount}</p>
         </div>
 
-        <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-destructive/50 transition-all duration-300">
+        <div className="bg-gradient-to-br from-card via-card to-destructive/5 border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-destructive/50 hover:shadow-[0_0_25px_rgba(239,68,68,0.2)] transition-all duration-300 hover:scale-105 transform">
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-destructive/10 flex items-center justify-center flex-shrink-0">
               <Database className="w-4 h-4 sm:w-5 sm:h-5 text-destructive" />
@@ -168,16 +183,25 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
           <p className="text-2xl sm:text-3xl font-bold text-foreground">{data.exposedRecords.toLocaleString()}</p>
         </div>
 
-        <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-warning/50 transition-all duration-300">
+        <div className={`rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 border-2 transition-all duration-500 ${riskColors[riskLevel].bg} ${riskColors[riskLevel].border} ${riskColors[riskLevel].glow} hover:scale-105 transform`}>
           <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-warning/10 flex items-center justify-center flex-shrink-0">
-              <AlertTriangle className="w-4 h-4 sm:w-5 sm:h-5 text-warning" />
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg ${riskColors[riskLevel].bg} flex items-center justify-center flex-shrink-0 animate-pulse`} style={{ animationDuration: '2s' }}>
+              <AlertTriangle className={`w-4 h-4 sm:w-5 sm:h-5 ${riskColors[riskLevel].text}`} />
             </div>
             <h3 className="font-semibold text-xs sm:text-sm text-muted-foreground">Risk Level</h3>
           </div>
-          <p className="text-2xl sm:text-3xl font-bold text-foreground">
-            {data.breachCount === 0 ? 'Low' : data.breachCount < 3 ? 'Medium' : 'High'}
+          <p className={`text-2xl sm:text-3xl font-bold ${riskColors[riskLevel].text}`}>
+            {riskLevel}
           </p>
+          {riskLevel === "High" && (
+            <p className="text-xs sm:text-sm text-muted-foreground mt-2">
+              {data.breachCount > 2 && data.passwordStatus === "exposed" 
+                ? "Multiple breaches + exposed password" 
+                : data.breachCount > 2 
+                ? "Multiple breaches detected" 
+                : "Email & password both exposed"}
+            </p>
+          )}
         </div>
       </div>
 
