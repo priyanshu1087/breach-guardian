@@ -15,7 +15,7 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
   const getRiskLevel = () => {
     const bothExposed = data.breachCount > 0 && data.passwordStatus === "exposed";
     if (data.breachCount > 2 || bothExposed) return "High";
-    if (data.breachCount > 0) return "Medium";
+    if (data.breachCount > 0 || data.passwordStatus === "exposed") return "Medium";
     return "Low";
   };
   
