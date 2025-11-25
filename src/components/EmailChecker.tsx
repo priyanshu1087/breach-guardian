@@ -46,14 +46,14 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="bg-card border border-border rounded-2xl p-8 md:p-12 
-                    shadow-[0_0_50px_rgba(34,211,238,0.1)] backdrop-blur-sm
-                    hover:shadow-[0_0_60px_rgba(34,211,238,0.15)] transition-all duration-500">
-        <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="max-w-2xl mx-auto px-4 sm:px-0">
+      <div className="bg-card border border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-10 
+                    shadow-[0_0_30px_rgba(34,211,238,0.1)] backdrop-blur-sm
+                    hover:shadow-[0_0_40px_rgba(34,211,238,0.15)] transition-all duration-300">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
           <div className="relative">
-            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Mail className="w-5 h-5 text-muted-foreground" />
+            <div className="absolute inset-y-0 left-3 sm:left-4 flex items-center pointer-events-none">
+              <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
             </div>
             <Input
               type="email"
@@ -61,7 +61,7 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
-              className="h-14 pl-12 pr-4 text-lg bg-secondary border-border 
+              className="h-12 sm:h-14 pl-10 sm:pl-12 pr-3 sm:pr-4 text-base sm:text-lg bg-secondary border-border 
                        focus:border-primary focus:ring-2 focus:ring-primary/20
                        placeholder:text-muted-foreground transition-all duration-300"
             />
@@ -83,9 +83,9 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
           </div>
 
           {checkPassword && (
-            <div className="animate-fade-in">
-              <Label htmlFor="password" className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
-                <Lock className="w-4 h-4" />
+            <div className="animate-fade-in space-y-2">
+              <Label htmlFor="password" className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
+                <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
                 Password
               </Label>
               <Input
@@ -94,10 +94,10 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
-                className="h-12 bg-secondary border-border focus:border-primary"
+                className="h-11 sm:h-12 bg-secondary border-border focus:border-primary text-base"
                 placeholder="Enter your password to check"
               />
-              <p className="text-xs text-muted-foreground mt-2">
+              <p className="text-xs text-muted-foreground">
                 🔒 Your password is hashed locally and never sent in plain text.
               </p>
             </div>
@@ -106,31 +106,31 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
           <Button
             type="submit"
             disabled={isLoading}
-            className="w-full h-14 text-lg font-semibold bg-primary hover:bg-primary/90 
-                     text-primary-foreground shadow-[0_0_20px_rgba(34,211,238,0.3)]
-                     hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-all duration-300
+            className="w-full h-12 sm:h-14 text-base sm:text-lg font-semibold bg-primary hover:bg-primary/90 
+                     text-primary-foreground shadow-[0_0_15px_rgba(34,211,238,0.3)]
+                     hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] transition-all duration-300
                      disabled:opacity-50 disabled:cursor-not-allowed group"
           >
             {isLoading ? (
               <>
-                <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground 
+                <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-primary-foreground/30 border-t-primary-foreground 
                               rounded-full animate-spin mr-2" />
                 Scanning...
               </>
             ) : (
               <>
-                <Search className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:scale-110 transition-transform" />
                 Check for Breaches
               </>
             )}
           </Button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-border">
-          <p className="text-sm text-muted-foreground text-center">
+        <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border">
+          <p className="text-xs sm:text-sm text-muted-foreground text-center leading-relaxed">
             We use the XposedOrNot API to check against millions of breach records.
-            <br />
-            Your email is not stored or shared.
+            <br className="hidden sm:block" />
+            <span className="block sm:inline mt-1 sm:mt-0"> Your email is not stored or shared.</span>
           </p>
         </div>
       </div>

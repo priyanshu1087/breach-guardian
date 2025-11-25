@@ -113,19 +113,19 @@ const Index = () => {
       {/* Grid pattern overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:100px_100px]" />
 
-      <div className="relative z-10 container mx-auto px-4 py-8 md:py-16">
+      <div className="relative z-10 container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:py-16">
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6 
-                          shadow-[0_0_30px_rgba(34,211,238,0.3)] animate-pulse"
+        <div className="text-center mb-8 sm:mb-10 md:mb-16 animate-fade-in">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-primary/10 mb-4 sm:mb-6 
+                          shadow-[0_0_20px_rgba(34,211,238,0.3)] sm:shadow-[0_0_30px_rgba(34,211,238,0.3)] animate-pulse"
                style={{ animationDuration: '2s' }}>
-            <Shield className="w-10 h-10 text-primary" />
+            <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-primary" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary 
-                         bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary via-accent to-primary 
+                         bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] px-4">
             Breach Guardian
           </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-2xl mx-auto px-4 leading-relaxed">
             Check if your email has been exposed in any data breaches. Stay secure, stay informed.
           </p>
         </div>
@@ -139,27 +139,27 @@ const Index = () => {
 
         {/* Security Stats - Only show when no results */}
         {!breachData && !isChecking && (
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-card border border-border rounded-xl p-6 text-center 
+          <div className="mt-10 sm:mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto px-4">
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-5 sm:p-6 text-center 
                           hover:border-primary/50 transition-all duration-300
-                          hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]">
-              <Shield className="w-8 h-8 text-primary mx-auto mb-3" />
-              <h3 className="text-2xl font-bold mb-2">Instant Check</h3>
-              <p className="text-muted-foreground text-sm">Real-time breach detection</p>
+                          hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]">
+              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-primary mx-auto mb-2 sm:mb-3" />
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">Instant Check</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">Real-time breach detection</p>
             </div>
-            <div className="bg-card border border-border rounded-xl p-6 text-center
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-5 sm:p-6 text-center
                           hover:border-warning/50 transition-all duration-300
-                          hover:shadow-[0_0_20px_rgba(251,146,60,0.15)]">
-              <AlertTriangle className="w-8 h-8 text-warning mx-auto mb-3" />
-              <h3 className="text-2xl font-bold mb-2">Detailed Analytics</h3>
-              <p className="text-muted-foreground text-sm">Complete breach history</p>
+                          hover:shadow-[0_0_15px_rgba(251,146,60,0.15)]">
+              <AlertTriangle className="w-7 h-7 sm:w-8 sm:h-8 text-warning mx-auto mb-2 sm:mb-3" />
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">Detailed Analytics</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">Complete breach history</p>
             </div>
-            <div className="bg-card border border-border rounded-xl p-6 text-center
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-5 sm:p-6 text-center
                           hover:border-success/50 transition-all duration-300
-                          hover:shadow-[0_0_20px_rgba(34,197,94,0.15)]">
-              <CheckCircle2 className="w-8 h-8 text-success mx-auto mb-3" />
-              <h3 className="text-2xl font-bold mb-2">Stay Protected</h3>
-              <p className="text-muted-foreground text-sm">Actionable recommendations</p>
+                          hover:shadow-[0_0_15px_rgba(34,197,94,0.15)]">
+              <CheckCircle2 className="w-7 h-7 sm:w-8 sm:h-8 text-success mx-auto mb-2 sm:mb-3" />
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2">Stay Protected</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">Actionable recommendations</p>
             </div>
           </div>
         )}
