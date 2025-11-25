@@ -54,9 +54,9 @@ const Index = () => {
       // Check password if provided
       if (password) {
         try {
-          const pwdHash = sha3_512(password);
+          const pwdHashAnon = sha3_512(password).substring(0, 10);
           const passwordResponse = await fetch(
-            `https://passwords.xposedornot.com/api/v1/pass/anon/${pwdHash}`
+            `https://passwords.xposedornot.com/v1/pass/anon/${pwdHashAnon}`
           );
           
           if (passwordResponse.status === 200) {
