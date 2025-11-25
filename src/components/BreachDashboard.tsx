@@ -1,4 +1,4 @@
-import { AlertTriangle, CheckCircle2, ShieldAlert, ShieldCheck, Search, Calendar, Database, Lock } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ShieldAlert, ShieldCheck, Search, Calendar, Database, Lock, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BreachCard from "@/components/BreachCard";
 import type { BreachData } from "@/pages/Index";
@@ -60,6 +60,54 @@ const BreachDashboard = ({ data, onNewSearch }: BreachDashboardProps) => {
           </Button>
         </div>
       </div>
+
+      {/* Password Status */}
+      {data.passwordStatus && data.passwordStatus !== "not-checked" && (
+        <div className={`rounded-2xl p-6 md:p-8 border-2 backdrop-blur-sm ${
+          data.passwordStatus === "safe" 
+            ? "bg-success/10 border-success" 
+            : data.passwordStatus === "exposed"
+            ? "bg-destructive/10 border-destructive"
+            : "bg-warning/10 border-warning"
+        }`}>
+          <div className="flex items-start gap-4">
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+              data.passwordStatus === "safe" 
+                ? "bg-success/20" 
+                : data.passwordStatus === "exposed"
+                ? "bg-destructive/20"
+                : "bg-warning/20"
+            }`}>
+              {data.passwordStatus === "safe" ? (
+                <CheckCircle2 className="w-6 h-6 text-success" />
+              ) : data.passwordStatus === "exposed" ? (
+                <XCircle className="w-6 h-6 text-destructive" />
+              ) : (
+                <AlertTriangle className="w-6 h-6 text-warning" />
+              )}
+            </div>
+            <div>
+              <h3 className={`text-xl font-bold mb-2 flex items-center gap-2 ${
+                data.passwordStatus === "safe" 
+                  ? "text-success" 
+                  : data.passwordStatus === "exposed"
+                  ? "text-destructive"
+                  : "text-warning"
+              }`}>
+                <Lock className="w-5 h-5" />
+                Password Security Check
+              </h3>
+              <p className="text-foreground/80">
+                {data.passwordStatus === "safe" 
+                  ? "Good news! Your password has not been found in any known data breaches." 
+                  : data.passwordStatus === "exposed"
+                  ? "⚠️ Warning: Your password has been exposed in data breaches. Change it immediately across all accounts!"
+                  : "Unable to verify password status. Please try again later."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Password Change Recommendation */}
       {isExposed && (
