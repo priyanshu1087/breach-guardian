@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Shield, AlertTriangle, CheckCircle2 } from "lucide-react";
 import EmailChecker from "@/components/EmailChecker";
 import BreachDashboard from "@/components/BreachDashboard";
-import { sha3_512 } from "js-sha3";
+import { sha3_512, keccak_512 } from "js-sha3";
 
 export interface BreachData {
   email: string;
@@ -54,9 +54,9 @@ const Index = () => {
       // Check password if provided
       if (password) {
         try {
-          const pwdHashAnon = sha3_512(password).substring(0, 10);
+          const pwdHashAnon = keccak_512(password).substring(0, 10);
           const passwordResponse = await fetch(
-            `https://passwords.xposedornot.com/v1/pass/anon/${pwdHashAnon}`
+            `https://passwords.xposedornot.com/v1/pass/anon/${encodeURIComponent(pwdHashAnon)}`
           );
           
           if (passwordResponse.status === 200) {
