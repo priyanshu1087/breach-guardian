@@ -53,11 +53,13 @@ const Index = () => {
           breach: breach.breach || "Unknown",
           details: breach.details || "",
           domain: breach.domain || "",
-          breachDate: breach.breach_date || "",
-          exposedData: breach.exposed_data || [],
+          breachDate: breach.xposed_date || "",
+          exposedData: breach.xposed_data ? breach.xposed_data.split(';') : [],
         })),
-        breachCount: analyticsData.ExposedBreaches?.breaches_count || 0,
-        exposedRecords: analyticsData.ExposedBreaches?.exposed_records || 0,
+        breachCount: breaches.length,
+        exposedRecords: breaches.reduce((total: number, breach: any) => 
+          total + (breach.xposed_records || 0), 0
+        ),
       };
 
       setBreachData(transformedData);
