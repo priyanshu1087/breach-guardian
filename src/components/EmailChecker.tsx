@@ -63,6 +63,7 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
               disabled={isLoading}
               className="h-12 sm:h-14 pl-10 sm:pl-12 pr-3 sm:pr-4 text-base sm:text-lg bg-secondary border-border 
                        focus:border-primary focus:ring-2 focus:ring-primary/20
+                       hover:border-primary/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)]
                        placeholder:text-muted-foreground transition-all duration-300"
             />
           </div>
@@ -98,7 +99,9 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="h-11 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 bg-secondary border-border focus:border-primary text-base"
+                  className="h-11 sm:h-12 pl-10 sm:pl-12 pr-3 sm:pr-4 bg-secondary border-border focus:border-primary 
+                           hover:border-primary/50 hover:shadow-[0_0_20px_rgba(34,211,238,0.1)]
+                           transition-all duration-300 text-base"
                   placeholder="Enter your password to check"
                 />
               </div>

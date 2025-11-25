@@ -19,7 +19,8 @@ const BreachCard = ({ breach, index }: BreachCardProps) => {
     <div 
       className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 hover:border-destructive/50 
                transition-all duration-300 hover:shadow-[0_0_20px_rgba(239,68,68,0.1)]
-               sm:hover:shadow-[0_0_30px_rgba(239,68,68,0.1)] animate-slide-up"
+               sm:hover:shadow-[0_0_30px_rgba(239,68,68,0.1)] hover:-translate-y-1 hover:scale-[1.02]
+               cursor-pointer animate-slide-up"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4">
