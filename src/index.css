@@ -61,6 +61,28 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
     font-family: 'Outfit', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(189 94% 53% / 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    left: var(--mouse-x, 50%);
+    top: var(--mouse-y, 50%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  body.mouse-active::before {
+    opacity: 1;
   }
 }
 
