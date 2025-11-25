@@ -84,6 +84,10 @@ All colors MUST be HSL.
   body.mouse-active::before {
     opacity: 1;
   }
+
+  body.mouse-active:has(.disable-cursor-glow:hover)::before {
+    opacity: 0;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
