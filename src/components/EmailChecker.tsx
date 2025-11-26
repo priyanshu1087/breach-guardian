@@ -86,7 +86,7 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
           {checkPassword && (
             <div className="animate-fade-in space-y-2">
               <Label htmlFor="password" className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2 pl-0.5">
-                <Lock className="w-3 h-3 sm:w-4 sm:h-4" />
+                {/* <Lock className="w-3 h-3 sm:w-4 sm:h-4" /> */}
                 Password
               </Label>
               <div className="relative">
@@ -105,9 +105,8 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
                   placeholder="Enter your password to check"
                 />
               </div>
-              <p className="text-xs text-muted-foreground pl-10 sm:pl-12 flex items-start gap-1">
-                <span className="text-sm">🔒</span>
-                <span>Your password is hashed locally and never sent in plain text.</span>
+              <p className="text-xs text-muted-foreground text-center px-10 sm:px-12">
+                Your password is hashed locally and never sent in plain text.
               </p>
             </div>
           )}
@@ -137,7 +136,7 @@ const EmailChecker = ({ onCheck, isLoading }: EmailCheckerProps) => {
 
         <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-border">
           <p className="text-xs sm:text-sm text-muted-foreground text-center leading-relaxed">
-            We use the XposedOrNot API to check against millions of breach records.
+            We use the XposedOrNot to check against millions of breach records.
             <br className="hidden sm:block" />
             <span className="block sm:inline mt-1 sm:mt-0"> Your email is not stored or shared.</span>
           </p>
