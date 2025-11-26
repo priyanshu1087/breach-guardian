@@ -13,7 +13,17 @@ export default function NotFound() {
           The page you are looking for might have been removed, had its name changed or is temporarily unavailable.
         </p>
         <p className="output">
-          Please try to <a href="https://breach-guardian.vercel.app/" onClick={(e) => { e.preventDefault(); history.back(); }}>go back</a> or <a href="/">return to the homepage</a>.
+          Please try to <a href="/" onClick={(e) => {
+            e.preventDefault();
+            if (typeof window !== 'undefined') {
+              // go back if there's history, otherwise go home
+              if (window.history.length > 1) {
+                window.history.back();
+              } else {
+                window.location.href = '/';
+              }
+            }
+          }}>go back</a> or <a href="/">return to the homepage</a>.
         </p>
         <p className="output">Good luck.</p>
       </div>
