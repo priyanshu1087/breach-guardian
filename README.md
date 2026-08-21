@@ -1,73 +1,80 @@
-# Welcome to your Lovable project
+# 🛡️ Breach Guardian
 
-## Project info
+Breach Guardian is a privacy-focused web application designed to help users check whether their **email address has been exposed in known data breaches**.
 
-**URL**: https://lovable.dev/projects/7bf91c42-104b-41a4-8967-4af9e4b4352c
+The application provides a simple and user-friendly interface to search for an email address and view relevant breach information, including exposed records, risk level, breach history, and potentially compromised data types.
 
-## How can I edit this code?
+> 🔐 **Stay secure. Stay informed.**
 
-There are several ways of editing your application.
+## 🚀 Live Demo
 
-**Use Lovable**
+👉 https://breach-guardian.vercel.app
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7bf91c42-104b-41a4-8967-4af9e4b4352c) and start prompting.
+## ✨ Features
 
-Changes made via Lovable will be committed automatically to this repo.
+- 🔍 **Email Breach Detection**  
+  Check whether an email address has appeared in known data breaches.
 
-**Use your preferred IDE**
+- 🚨 **Exposure Detection**  
+  Clearly indicates when an email address has been found in a breach.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- 📊 **Breach Statistics**
+  - Total number of breaches
+  - Number of exposed records
+  - Risk level
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- 📋 **Breach History**  
+  View detailed information about breaches associated with the searched email.
 
-Follow these steps:
+- 🧾 **Exposed Data Types**  
+  Shows the types of information potentially exposed, such as:
+  - Email addresses
+  - Names
+  - Phone numbers
+  - Physical addresses
+  - Geographic locations
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- ⚠️ **Security Recommendations**  
+  Provides recommended actions when an email is exposed:
+  - Change passwords
+  - Enable two-factor authentication
+  - Monitor accounts for suspicious activity
+  - Use unique passwords or a password manager
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- 🎨 **Modern Security UI**  
+  Dark-themed interface with visual indicators for exposure and risk levels.
 
-# Step 3: Install the necessary dependencies.
-npm i
+- ☁️ **Vercel Deployment**  
+  Deployed and accessible through Vercel.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## 🖥️ How It Works
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/7bf91c42-104b-41a4-8967-4af9e4b4352c) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+```text
+Enter Email Address
+        │
+        ▼
+Validate Email
+        │
+        ▼
+Breach Lookup
+        │
+        ▼
+Process Results
+        │
+        ├───────────────┐
+        ▼               ▼
+   No Breach        Breach Found
+        │               │
+        ▼               ▼
+   Safe Status      Exposure Alert
+                        │
+                        ▼
+                  Risk Assessment
+                        │
+                        ▼
+                  Breach History
+                        │
+                        ▼
+              Security Recommendations
